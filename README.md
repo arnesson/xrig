@@ -87,7 +87,8 @@ Sample config for an array of Vega's:
             {"clock": 950, "vddc": 0.9}
         ],
         "target_temperature": 75,
-        "power_limit": 0
+        "power_limit": 0,
+        "min_fan_limit": 0
     }
 }
 ```
@@ -158,7 +159,8 @@ Example output:
                     {"clock": 950, "vddc": 0.9}
                 ],
                 "target_temperature": 75,
-                "power_limit": 0
+                "power_limit": 0,
+                "min_fan_limit": 0
             },
             "threads": [
                 {

@@ -182,7 +182,10 @@ Adl::Adl(const std::vector<int> busIds) {
 		    setMemoryClock(adapterIndex, i, odNMemoryClocks[i]->iClock, odNMemoryClocks[i]->iVddc);
 		}
 		if (Options::i()->targetTemperature()) {
-			setFanControl(adapterIndex, Options::i()->targetTemperature());
+			setTargetTemperature(adapterIndex, Options::i()->targetTemperature());
+		}
+		if (Options::i()->minFanLimit()) {
+			setMinFanLimit(adapterIndex, Options::i()->minFanLimit());
 		}
 		if (Options::i()->powerLimit() != 0) {
 			setPowerLimit(adapterIndex, Options::i()->powerLimit());
@@ -336,10 +339,21 @@ void Adl::setPowerLimit(int adapterIndex, int powerLimit) {
 	}
 }
 
-void Adl::setFanControl(int adapterIndex, int targetTemp) {
+void Adl::setTargetTemperature(int adapterIndex, int targetTemperature) {
 	ADLODNFanControl* odNFanControl = OverdriveN_FanControl_Get(adapterIndex);
 
-	odNFanControl->iTargetTemperature = targetTemp;
+	odNFanControl->iTargetTemperature = targetTemperature;
+	odNFanControl->iMode = ADLODNControlType::ODNControlType_Manual;
+
+	if (ADL_OK != ADL2_OverdriveN_FanControl_Set(context, adapterIndex, odNFanControl)) {
+		LOG_ERR("ADL2_OverdriveN_FanControl_Set failed. adapterIndex: %d", adapterIndex);
+	}
+}
+
+void Adl::setMinFanLimit(int adapterIndex, int minFanLimit) {
+	ADLODNFanControl* odNFanControl = OverdriveN_FanControl_Get(adapterIndex);
+
+	odNFanControl->iMinFanLimit = minFanLimit;
 	odNFanControl->iMode = ADLODNControlType::ODNControlType_Manual;
 
 	if (ADL_OK != ADL2_OverdriveN_FanControl_Set(context, adapterIndex, odNFanControl)) {

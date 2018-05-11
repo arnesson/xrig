@@ -86,6 +86,7 @@ public:
     inline const std::vector<ADLODNPerformanceLevelX2*> &memoryClocks() const { return m_memoryClocks; }
     inline int targetTemperature() const                  { return m_targetTemperature; }
     inline int powerLimit() const                         { return m_powerLimit; }
+    inline int minFanLimit() const                        { return m_minFanLimit; }
 
     inline static void release()                          { delete m_self; }
 
@@ -137,6 +138,7 @@ private:
     std::vector<ADLODNPerformanceLevelX2*> m_memoryClocks;
     int m_targetTemperature;
     int m_powerLimit;
+    int m_minFanLimit;
 };
 
 #endif /* __OPTIONS_H__ */

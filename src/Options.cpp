@@ -152,6 +152,7 @@ static struct option const profile_options[] = {
     { "memory",               1, nullptr, 5001 },
     { "target_temperature",   1, nullptr, 5002 },
     { "power_limit",          1, nullptr, 5003 },
+    { "min_fan_limit",        1, nullptr, 5004 },
     { 0, 0, 0, 0 }
 };
 
@@ -211,7 +212,8 @@ Options::Options(int argc, char **argv) :
     m_systemClocks(0),
     m_memoryClocks(0),
     m_targetTemperature(0),
-    m_powerLimit(0)
+    m_powerLimit(0),
+    m_minFanLimit(0)
 {
     m_pools.push_back(new Url());
 
@@ -398,6 +400,10 @@ bool Options::parseArg(int key, uint64_t arg)
 
     case 5002: /* profile.target_temperature */
         m_targetTemperature = (int) arg;
+        break;
+
+    case 5004: /* profile.min_fan_limit */
+        m_minFanLimit = (int) arg;
         break;
 
     default:

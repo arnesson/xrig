@@ -120,7 +120,8 @@ private:
 	void setSystemClock(int adapterIndex, int level, int clock, int vddc);
 	void setMemoryClock(int adapterIndex, int level, int clock, int vddc);
 	void setPowerLimit(int adapterIndex, int powerLimit);
-	void setFanControl(int adapterIndex, int targetTemp);
+	void setTargetTemperature(int adapterIndex, int targetTemperature);
+	void setMinFanLimit(int adapterIndex, int minFanLimit);
 };
 
 #endif /* __ADL_H__ */

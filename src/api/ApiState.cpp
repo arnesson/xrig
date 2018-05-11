@@ -212,6 +212,7 @@ void ApiState::getGpus(rapidjson::Document &doc) const
         profile.AddMember("system", system, allocator);
         profile.AddMember("memory", memory, allocator);
         profile.AddMember("target_temperature", odNFanControl->iTargetTemperature, allocator);
+        profile.AddMember("min_fan_limit", odNFanControl->iMinFanLimit, allocator);
         profile.AddMember("power_limit", odNPowerControl->iTDPLimit, allocator);
 
         gpu.AddMember("profile", profile, allocator);
